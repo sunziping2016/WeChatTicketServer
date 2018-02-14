@@ -3,12 +3,18 @@
 
 ## [Unreleased]
 ### Added
-- 增加了changelog
-- 增加了license
-- 增加了README
 
 ### Changed
 
 ### Removed
 
-[Unreleased]: https://github.com/sunziping2016/WeChatTicketServer/compare/v0.0.0...HEAD
+## [0.0.1] - 2018-2-14
+### Added
+- 以GPL-v3.0发布代码
+- 增加了changelog用于版本管理
+- 增加了editorconfig和eslint用于代码质量管理
+- 添加了持续集成
+- `app.js`、`server.js`更好的文档
+
+[Unreleased]: https://github.com/sunziping2016/WeChatTicketServer/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/sunziping2016/WeChatTicketServer/compare/v0.0.0...v0.0.1

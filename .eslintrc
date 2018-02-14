@@ -1,0 +1,26 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "extends": "standard",
+  "rules": {
+    "semi": ["error", "always"],
+    "curly": "off",
+    "no-var": "error",
+    "no-return-assign": "off",
+    "arrow-parens": ["error", "as-needed"],
+    "arrow-spacing": "error",
+    "prefer-arrow-callback": "error",
+    "space-before-function-paren": ["error", {
+      "named": "never"
+    }],
+    "no-multi-spaces": ["error", {
+      "ignoreEOLComments": true
+    }],
+    "new-cap": "off"
+  }
+}

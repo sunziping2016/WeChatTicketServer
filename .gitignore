@@ -1,1 +1,6 @@
 /.idea/
+/config/config.json
+/config/config.test.json
+/config/config.travis.json
+docs
+node_modules

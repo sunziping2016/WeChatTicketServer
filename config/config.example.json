@@ -1,0 +1,25 @@
+{
+  "host": "localhost",
+  "port": 8000,
+  "site": "https://example.com",
+  "db": "mongodb://localhost/wechatTicket",
+  "redis": "redis://localhost/",
+  "wechat": {
+    "token": "WECHAT_TOKEN",
+    "appid": "WECHAT_APPID",
+    "appsecret": "WECHAT_APPSECRET",
+    "encodingAESKey": ""
+  },
+  "email": {
+    "host": "smtp.example.com",
+    "port": 465,
+    "secure": true,
+    "auth": {
+      "user": "noreply@example.com",
+      "pass": ""
+    }
+  },
+  "log-level": "info",
+  "cluster": false,
+  "static": true
+}
