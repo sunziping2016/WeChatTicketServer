@@ -3,6 +3,7 @@
 
 ## [Unreleased]
 ### Added
+- 增加了RBAC系统
 
 ### Changed
 

@@ -17,7 +17,7 @@
  * 如果`cluster`没有指定，则默认是CPU个数。目前我们的分布式方案中没有采用sticky session，
  * 其主要原因是带来了额外的性能开销，这也意味着Socket.IO必须采用WebSocket，禁止long polling。
  *
- * 总的而言，我们认为应该是反向代理负责sticky session。尽可能干净地断开所有链接。
+ * 总的而言，我们认为应该是反向代理负责sticky session。此外我们尽可能干净地断开所有链接再退出。
  *
  * @module app
  */

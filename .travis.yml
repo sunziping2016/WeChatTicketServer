@@ -1,27 +1,30 @@
 sudo: false
 language: node_js
 node_js:
-  - node
+- node
 services:
-  - mongodb
-  - redis-server
+- mongodb
+- redis-server
 cache:
   directories:
-    - node_modules
+  - node_modules
 env:
-  - CONFIG_FILE=config.travis.json
+- CONFIG_FILE=config.travis.json
 before_install:
-  - openssl aes-256-cbc -K $encrypted_935761c02505_key -iv $encrypted_935761c02505_iv -in config/config.travis.json.enc -out config/config.travis.json -d
+- openssl aes-256-cbc -K $encrypted_b2da75706683_key -iv $encrypted_b2da75706683_iv
+  -in config.travis.json.enc -out config.travis.json -d
+- openssl aes-256-cbc -K $encrypted_935761c02505_key -iv $encrypted_935761c02505_iv
+  -in config/config.travis.json.enc -out config/config.travis.json -d
 before_script:
-  - npm prune
+- npm prune
 script:
-  - npm run lint
-  - npm run test
-  - npm run docs
+- npm run lint
+- npm run test
+- npm run docs
 deploy:
   provider: pages
   local_dir: docs/wechat-ticket-server
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  github_token: "$GITHUB_TOKEN"
   on:
     branch: dev

@@ -9,6 +9,7 @@ const qs = require('koa-qs');
 const Router = require('koa-router');
 const serve = require('koa-static');
 const mount = require('koa-mount');
+const Models = require('./models');
 const redisCommands = require('redis-commands');
 const {promisify, koaLogger} = require('./utils');
 
@@ -39,10 +40,9 @@ class Server {
    */
   async start(config) {
     /* ==== 初始化上下文环境 ==== */
-    config = Server.normalizeConfig(config || {});
     const app = this.app = new Koa();
     app.proxy = true;
-    mongoose.connect(config.db);
+    await mongoose.connect(config.db);
     const redis = Redis.createClient(config.redis);
     const sioRedis = Redis.createClient(config.redis);
     const server = http.createServer(app.callback());
@@ -60,37 +60,23 @@ class Server {
     };
     if (config.email)
       global.email = mailer.createTransport(config.email); // E-mail邮件传输
+    global.models = Models(global);
     app.context.global = global;
     /* ==== 设置路由 ==== */
     qs(app);
     app.use(koaLogger);
     const router = new Router();
     app.use(router.routes(), router.allowedMethods());
-    app.use(mount('/uploads', serve('uploads')));
-    app.use(serve('public'));
+    if (config.static) {
+      app.use(mount('/uploads', serve('uploads')));
+      app.use(serve('public'));
+    }
     if (config.port !== undefined)
       await new Promise((resolve, reject) =>
         server
           .listen(config.port, config.host, resolve)
           .once('error', reject)
       );
-  }
-
-  static normalizeConfig(config) {
-    const defaultConfig = {
-      name: 'Crowd Sourcing',
-      host: 'localhost',
-      db: 'mongodb://localhost/wechatTicket',
-      redis: 'redis://localhost/',
-      'upload-dir': 'uploads',
-      'task-template-dir': './task-templates',
-      'temp-dir': 'temp',
-      'static': false
-    };
-    Object.assign(defaultConfig, config);
-    if (defaultConfig.site === undefined)
-      defaultConfig.site = `http://${defaultConfig.host}:${defaultConfig.port}`;
-    return defaultConfig;
   }
 
   /**
