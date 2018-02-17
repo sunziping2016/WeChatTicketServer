@@ -6,6 +6,17 @@ const STATUS_COLORS = {
   info: 'green'
 };
 
+const alnumChars = '0123456789' +
+  'abcdefghijklmnopqrstuvwxyz' +
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+function randomAlnumString(length) {
+  let result = '';
+  for (let i = 0; i < length; ++i)
+    result += alnumChars[Math.floor(Math.random() * alnumChars.length)];
+  return result;
+}
+
 function promisify(func, settings) {
   return function (...args) {
     return new Promise((resolve, reject) => {
@@ -48,6 +59,7 @@ async function koaLogger(ctx, next) {
 }
 
 module.exports = {
+  randomAlnumString,
   promisify,
   koaLogger
 };

@@ -1,7 +1,9 @@
-const Users = require('./users.js');
-
 module.exports = async function (global) {
+  const {Permissions, Roles, Users} = await require('./users.js')(global);
   return {
-    users: await Users(global)
+    permissions: Permissions,
+    roles: Roles,
+    users: Users,
+    jwt: await require('./jwt')(global)
   };
 };

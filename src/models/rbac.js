@@ -1,33 +1,20 @@
 module.exports = {
-  // 初始的权限
+  // 权限
   permissions: [
-    {subject: 'Role', action: 'create'},
-    {subject: 'Role', action: 'read'},
-    {subject: 'Role', action: 'update'},
-    {subject: 'Role', action: 'delete'},
-    {subject: 'User', action: 'create'},
-    {subject: 'User', action: 'read'},
-    {subject: 'User', action: 'update'},
-    {subject: 'User', action: 'delete'}
+    {subject: 'Users', action: 'create'},
+    {subject: 'Users', action: 'read'},
+    {subject: 'Users', action: 'update'},
+    {subject: 'Users', action: 'delete'}
   ],
-  // 初始的角色
+  // 角色
   roles: [
     {
       name: 'user-admin',
       permissions: [
-        ['create', 'User'],
-        ['read', 'User'],
-        ['update', 'User'],
-        ['delete', 'User']
-      ]
-    },
-    {
-      name: 'role-admin',
-      permissions: [
-        ['create', 'Role'],
-        ['read', 'Role'],
-        ['update', 'Role'],
-        ['delete', 'Role']
+        ['create', 'Users'],
+        ['read', 'Users'],
+        ['update', 'Users'],
+        ['delete', 'Users']
       ]
     }
   ],
@@ -37,7 +24,7 @@ module.exports = {
     {
       username: 'superuser',
       password: 'superuser',
-      roles: ['role-admin', 'user-admin']
+      roles: ['user-admin']
     }
   ]
 };

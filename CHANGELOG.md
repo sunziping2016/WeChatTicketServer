@@ -4,6 +4,7 @@
 ## [Unreleased]
 ### Added
 - 增加了RBAC系统
+- 支持了用户登录
 
 ### Changed
 

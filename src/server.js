@@ -11,6 +11,7 @@ const serve = require('koa-static');
 const mount = require('koa-mount');
 const Models = require('./models');
 const redisCommands = require('redis-commands');
+const Api = require('./api');
 const {promisify, koaLogger} = require('./utils');
 
 redisCommands.list.forEach(key =>
@@ -60,12 +61,14 @@ class Server {
     };
     if (config.email)
       global.email = mailer.createTransport(config.email); // E-mail邮件传输
-    global.models = Models(global);
+    Object.assign(global, await Models(global));
     app.context.global = global;
     /* ==== 设置路由 ==== */
     qs(app);
     app.use(koaLogger);
     const router = new Router();
+    const api = Api(global);
+    router.use('/api', api.routes(), api.allowedMethods());
     app.use(router.routes(), router.allowedMethods());
     if (config.static) {
       app.use(mount('/uploads', serve('uploads')));
